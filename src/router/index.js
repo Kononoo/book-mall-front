@@ -16,7 +16,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'Layout',
-      component: () => import('@/views/Layout/Layout.vue')
+      redirect: '/login'
+      // component: () => import('@/views/Layout/Layout.vue')
     },
     {
       path: '/login',
