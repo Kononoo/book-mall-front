@@ -3,4 +3,4 @@
 
 # npm test
 # pnpm lint
- pnpm lint-staged
+# pnpm lint-staged

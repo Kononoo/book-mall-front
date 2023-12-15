@@ -29,6 +29,8 @@ export const useUserStore = defineStore(
       setUser
     }
   },
+  // 数据持久化存储
+  // 原理：设置state时会把数据自动同步给localStorage，获取数据时优先从localStorage获取
   {
     persist: true
   }

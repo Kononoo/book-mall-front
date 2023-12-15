@@ -1,11 +1,5 @@
-<script setup>
+<script setup></script>
 
-</script>
+<template></template>
 
-<template>
-  $END$
-</template>
-
-<style scoped>
-
-</style>
+<style scoped></style>

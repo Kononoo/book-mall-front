@@ -51,7 +51,7 @@ httpInstance.interceptors.response.use(
     //     message: '登录身份过期，请重新登录!' || '服务异常'
     //   })
     //   setTimeout(() => {
-    //     router.push('/login')
+    //     router.push('/Login')
     //   }, 500)
     // }
     return Promise.reject(e)
@@ -96,7 +96,7 @@ export { baseURL }
 // }, (error) => {
 //   // status在400~500之间的我们认定为是登录过期
 //   if (error.response.status >= 400 && error.response.status < 500) {
-//     router.push('/login')
+//     router.push('/Login')
 //   }
 //   return Promise.reject(error.response.data.error)
 // })
