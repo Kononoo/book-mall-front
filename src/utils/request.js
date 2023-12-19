@@ -2,10 +2,10 @@ import axios from 'axios'
 import { useUserStore } from '@/stores'
 import { ElMessage } from 'element-plus'
 
-const baseURL = 'http://localhost:8080'
+const baseURL = 'http://localhost'
 const httpInstance = axios.create({
   baseURL: baseURL,
-  timeout: 10000 // 超时时间3s
+  timeout: 10000 // 超时时间10s
 })
 
 // 添加请求拦截器
@@ -16,6 +16,7 @@ httpInstance.interceptors.request.use(
     if (userStore.token) {
       // 请求头的 Authorization 加上 token 数据, 后端通过 request.getHeaders("Authorization")来获取
       config.headers.Authorization = userStore.token
+      // config.headers.Authorization = `Bearer ${token}`
     }
     return config
   },
@@ -30,30 +31,36 @@ httpInstance.interceptors.response.use(
   (res) => {
     if (res.data.code === 0) {
       return res
+    } else {
+      ElMessage({
+        type: 'error',
+        message: res.data.msg || '服务异常'
+      })
     }
     // 处理业务失败，给出错误提示
     return Promise.reject(res.data)
   },
   (e) => {
     // 统一错误提示
+    // 当且仅当.response.data 存在时，它将返回 e.response.data.msg。如果其中任何一部分不存在，整个表达式将返回服务异常
     ElMessage({
       type: 'error',
-      message: e.response.data?.message || '服务异常'
+      message: e.response.data?.msg || '服务异常'
     })
-    // 401token失效处理
+    // 401 token失效 或 session过期 处理
     // 1 清除本地数据   2 跳转登录页
-    // if (e.response?.status === 401) {
-    //   const userStore = useUserStore()
-    //   userStore.removeToken()
-    //   // 组件是 .vue 文件 不需要导包 自动导了, 这是js文件必须导包
-    //   ElMessage({
-    //     type: 'error',
-    //     message: '登录身份过期，请重新登录!' || '服务异常'
-    //   })
-    //   setTimeout(() => {
-    //     router.push('/Login')
-    //   }, 500)
-    // }
+    if (e.response?.status === 401) {
+      const userStore = useUserStore()
+      userStore.removeToken()
+      // 组件是 .vue 文件 不需要导包 自动导了, 这是js文件必须导包
+      ElMessage({
+        type: 'error',
+        message: '请先登录！'
+      })
+      // setTimeout(() => {
+      //   router.replace('/Login')
+      // }, 500)
+    }
     return Promise.reject(e)
   }
 )

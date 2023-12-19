@@ -38,7 +38,7 @@ const rules = {
   ],
   repassword: [
     { required: true, message: '请输入密码', trigger: 'blur' },
-    { pattern: /^\S{3,15}$/, message: '密码必须是6-15位的非空字符', trigger: 'blur' },
+    { pattern: /^\S{3,15}$/, message: '密码必须是3-15位的非空字符', trigger: 'blur' },
     {
       validator: (rules, value, callback) => {
         if (value !== formModel.password) {
@@ -51,6 +51,8 @@ const rules = {
     }
   ]
 }
+
+// 用户注册
 const register = async () => {
   await form.value.validate() // 等待成功结果
   console.log('开始注册请求')
@@ -59,14 +61,20 @@ const register = async () => {
   isRegister.value = false
 }
 
+// 用户登录
 const userStore = useUserStore()
 const router = useRouter()
 const login = async () => {
   await form.value.validate()
   console.log('开始登录')
   const res = await userLoginAPI(formModel)
+  // 保存用户token和用户信息
   userStore.setToken(res.data.token)
+  userStore.setUserInfo(res.data.data)
   ElMessage.success('登录成功')
+  if (res.data.data.role === 1) {
+    await router.push('/admin')
+  }
   await router.push('/')
 }
 // 切换页面时清空数据

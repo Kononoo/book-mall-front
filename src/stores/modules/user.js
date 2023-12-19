@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { userGetInfoAPI } from '@/api/user.js'
 
 export const useUserStore = defineStore(
   'book-user',
@@ -17,7 +18,7 @@ export const useUserStore = defineStore(
       const res = await userGetInfoAPI()
       user.value = res.data.data
     }
-    const setUser = (user) => {
+    const setUserInfo = (user) => {
       user.value = user
     }
     return {
@@ -26,7 +27,7 @@ export const useUserStore = defineStore(
       removeToken,
       user,
       getUserInfo,
-      setUser
+      setUserInfo
     }
   },
   // 数据持久化存储
