@@ -16,7 +16,31 @@ const router = createRouter({
     {
       path: '/',
       name: 'Layout',
-      component: () => import('@/views/Layout/Layout.vue')
+      component: () => import('@/views/Layout/Layout.vue'),
+      children:[{
+        path:'/',
+        component:()=>import("@/views/Layout/components/LayoutHome.vue")},{
+        path:'/home',
+        name:'home',
+        component:()=>import("@/views/Layout/components/LayoutHome.vue")}, {
+        path:'address',
+        name:'address',
+        component:()=>import("@/views/Layout/components/LayoutAddress.vue")},{
+        path:'category',
+        name:'category',
+        component:()=>import("@/views/Layout/components/LayoutCategory.vue")},{
+        path:'order',
+        name:'order',
+        component:()=>import("@/views/Layout/components/LayoutOrder.vue")},
+
+
+
+      ]
+    },
+    {
+      path:'/cart',
+      name:'cart',
+      component:()=>import("@/views/Layout/components/LayoutCart.vue")
     },
     {
       path: '/login',
