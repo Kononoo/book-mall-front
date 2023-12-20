@@ -243,8 +243,9 @@ export default {
 
 <style lang="scss" scoped>
 .cartContainer {
-  width: 100%;
   display: flex;
+  margin: 0 auto;
+  text-align: center;
 
   .el-table {
     width: 100%;
@@ -272,11 +273,11 @@ export default {
     position: fixed;
     border-top: 1px solid #ccc;
     z-index: 999;
-    backdrop-filter: blur(10px);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    align-self: flex-start;
 
     .left {
       display: flex;

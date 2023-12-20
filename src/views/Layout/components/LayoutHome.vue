@@ -2,19 +2,20 @@
 </script>
 
 <template>
+  <div class="BookCard" style="padding-top: 20px">
+    <el-carousel :interval="4000" type="card" height="300px">
+      <el-carousel-item v-for="item in card" :key="item">
+        <!--          <h3 class="medium">{{ item }}</h3>-->
+        <img v-bind:src="item.src" alt="">
+      </el-carousel-item>
+    </el-carousel>
+  </div>
   <div class="container">
-    <div style="padding-top: 20px">
-      <el-carousel :interval="4000" type="card" height="300px">
-        <el-carousel-item v-for="item in card" :key="item">
-          <!--          <h3 class="medium">{{ item }}</h3>-->
-          <img v-bind:src="item.src" alt="">
-        </el-carousel-item>
-      </el-carousel>
-    </div>
-    <div class="container">
-      <h1 style="color:#27ba9b">热门读物</h1>
-    </div>
-    <div>
+
+    <div class="data-home">
+      <div class="container" style="margin-bottom: 20px">
+        <h1 style="color:#27ba9b">热门读物</h1>
+      </div>
       <div class="infinite-list-wrapper" style="overflow:auto;text-align: center">
         <ul
             class="list"
@@ -24,10 +25,11 @@
             <el-row>
               <el-col :span="8" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 2 : 0">
                 <a href="/login">
-                <el-card :body-style="{ padding: '0px' }" shadow="hover" class="BookCard">
+                <el-card :body-style="{ padding: '20px' }" shadow="hover" class="BookCard">
                   <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image" alt="">
                   <div style="padding: 1px;">
                     <div style="font-size: 15px">《你的名字》</div>
+                    <div style="font-size: 15px">￥20</div>
                     <div class="bottom clearfix">
                       <time class="time">{{ currentDate }}</time>
                     </div>
@@ -46,7 +48,9 @@
 </template>
 <style scoped lang="scss">
 .BookCard{
-  width: 100%;
+  width: 90%;
+  text-align: center;
+  margin-left: 5%;
 }
 .time {
   font-size: 13px;
@@ -81,7 +85,10 @@
   max-width: 24%;
   flex: 0 0 33.3333333333%;
 }
-
+.data-home{
+  box-shadow: 0 2px 10px lightgray;
+  padding-left: 10px;
+}
 
 
  .el-col-offset-2 {
