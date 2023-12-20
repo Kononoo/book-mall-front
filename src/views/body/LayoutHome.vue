@@ -106,7 +106,7 @@
 export default {
   data(){
     return {
-      card:[{src: new URL("../../../assets/image/card1.jpeg",import.meta.url).href},{src: new URL("../../../assets/image/card2.jpeg",import.meta.url).href},{src: new URL("../../../assets/image/card3.jpeg",import.meta.url).href}],
+      card:[{src: new URL("@/assets/image/card1.jpeg",import.meta.url).href},{src: new URL("@/assets/image/card2.jpeg",import.meta.url).href},{src: new URL("@/assets/image/card3.jpeg",import.meta.url).href}],
       count: 10,
       Data:null,
       loading: false
