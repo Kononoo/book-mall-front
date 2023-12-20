@@ -12,7 +12,7 @@
         <el-menu-item index="/home" @click="jumpto('/')">首页</el-menu-item>
         <el-sub-menu index="/category">
           <template #title>图书类别</template>
-          <el-menu-item v-for="item in categoryList" :key="item" :index="'/category?categoryID=' + item.categoryID + '&category=' + item.category">
+          <el-menu-item v-for="item in categoryList" :key="item" :index='"/category/"+item.category'>
             {{ item.category }}
           </el-menu-item>
         </el-sub-menu>
@@ -88,7 +88,7 @@
 
   .searchInput {
     position: relative;
-    width: 40rem;
+    width: 300px;
     margin-top: 14px;
     height: 50%;
     align-items: center;
@@ -99,5 +99,12 @@
 <script>
   function jumpto(path){
     this.$router.release(path)
+  }
+  export default {
+    data(){
+      return{
+        categoryList:[{categoryID:1,category:"分类1"},{categoryID:2,category:"分类2"},{categoryID:3,category:"分类3"},{categoryID:4,category:"分类4"}]
+      }
+    }
   }
 </script>

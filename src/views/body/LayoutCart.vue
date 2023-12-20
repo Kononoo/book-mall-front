@@ -75,15 +75,17 @@ import LayoutNav from '@/views/Layout/components/LayoutNav.vue'
 <script>
 
 import service from "@/utils/request.js";
+import axios from "axios";
 
 
 export default {
   name: "CartView",
   data() {
     return {
+      userId:null,
       cartList: [{
         orderID: 1,
-        coverImg: new URL("../../../assets/image/attack1.png",import.meta.url).href,
+        coverImg: new URL("@/assets/image/attack1.png",import.meta.url).href,
         title: "Book 1",
         author: "Author 1",
         price: 20.00,
@@ -92,7 +94,7 @@ export default {
       },
         {
           orderID: 2,
-          coverImg: new URL("../../../assets/image/attack2.png",import.meta.url).href,
+          coverImg: new URL("@/assets/image/attack2.png",import.meta.url).href,
           title: "Book 2",
           author: "Author 2",
           price: 25.00,
@@ -107,6 +109,39 @@ export default {
       pageSize: 5,
     };
   },
+
+  mounted() {
+    var axios = require('axios');
+    //获取用户信息
+    var getUserConfig = {
+      method: 'get',
+      url: 'http://localhost/user/',
+    }
+    axios(getUserConfig)
+      .then(function (response) {
+        var user = JSON.stringify(response.data);
+        this.userId = user.id;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    //获取购物车数据
+    var config = {
+      method: 'get',
+      url: 'http://localhost/cart/list?userId='+this.userId,
+      headers: {
+      }
+    };
+    axios(config)
+        .then(function (response) {
+          this.cartList = JSON.stringify(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+  },
+
   methods: {
     // 点击减一按钮
     decrementQuantity(row) {
@@ -184,6 +219,22 @@ export default {
           this.$router.replace({ name: "settle" });
         });
       });
+      //清空购物车
+      // var shopConfig = {
+      //   method: 'delete',
+      //   url: 'http://localhost/cart/clean?userId='+this.userId,
+      //   headers: {
+      //     'User-Agent': 'Apifox/1.0.0 (https://apifox.com)'
+      //   }
+      // };
+      //
+      // axios(shopConfig)
+      //     .then(function (response) {
+      //       JSON.stringify(response.data);
+      //     })
+      //     .catch(function (error) {
+      //       console.log(error);
+      //     });
     },
     // 数量为0或空时自动设为1
     handleQuantityChange(row) {

@@ -26,15 +26,16 @@ const router = createRouter({
         path:'address',
         name:'address',
         component:()=>import("@/views/body/LayoutAddress.vue")},{
-        path:'category',
-        name:'category',
-        component:()=>import("@/views/body/LayoutCategory.vue")},{
         path:'order',
         name:'order',
         component:()=>import("@/views/body/LayoutOrder.vue")},{
-        path:'detail',
+        path:'detail/:id',
         name:'detail',
-        component:()=>import("@/views/body/LayoutDetail.vue")}]
+        component:()=>import("@/views/body/LayoutDetail.vue")},{
+        path:'category/:category',
+        name:'category',
+        component:()=>import("@/views/body/LayoutCategory.vue")
+      }]
     },
     {
       path:'/cart',

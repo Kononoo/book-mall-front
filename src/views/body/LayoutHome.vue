@@ -23,13 +23,13 @@
             infinite-scroll-disabled="disabled">
           <li v-for="i in count" class="list-item">
             <el-row>
-              <el-col :span="8" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 2 : 0">
-                <a href="/detail">
+              <el-col :span="8" v-for="book in books" :key="book" :offset="index > 0 ? 2 : 0">
+                <a href="/detail/id=1">
                 <el-card :body-style="{ padding: '20px' }" shadow="hover" class="BookCard">
-                  <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image" alt="">
+                  <img :src=book.coverImg class="image" alt="">
                   <div style="padding: 1px;">
-                    <div style="font-size: 15px">《你的名字》</div>
-                    <div style="font-size: 15px">￥20</div>
+                    <div style="font-size: 15px">{{book.name}}</div>
+                    <div style="font-size: 15px">{{book.price}}</div>
                     <div class="bottom clearfix">
                       <time class="time">{{ currentDate }}</time>
                     </div>
@@ -51,6 +51,7 @@
   width: 90%;
   text-align: center;
   margin-left: 5%;
+  margin-bottom: 5%;
 }
 .time {
   font-size: 13px;
@@ -108,8 +109,26 @@ export default {
     return {
       card:[{src: new URL("@/assets/image/card1.jpeg",import.meta.url).href},{src: new URL("@/assets/image/card2.jpeg",import.meta.url).href},{src: new URL("@/assets/image/card3.jpeg",import.meta.url).href}],
       count: 10,
+      page:0,
       Data:null,
-      loading: false
+      loading: false,
+      books:[{
+        name:"三体",
+        price:"￥25",
+        coverImg: new URL("@/assets/image/三体.png",import.meta.url).href,
+      },{
+        name:"三体",
+        price:"￥25",
+        coverImg: new URL("@/assets/image/三体.png",import.meta.url).href,
+      },{
+        name:"三体",
+        price:"￥25",
+        coverImg: new URL("@/assets/image/三体.png",import.meta.url).href,
+      },{
+        name: "三体",
+        price: "￥25",
+        coverImg: new URL("@/assets/image/三体.png", import.meta.url).href,
+      }]
     }
   },
   computed: {
@@ -123,11 +142,32 @@ export default {
   methods: {
     load () {
       this.loading = true
+      this.page +=1;
       setTimeout(() => {
-        // this.axios.get(api).then((response) => {
-        //   this.count=response.data.length
-        //   this.Data=response.data
-        // })
+        // 数据获取
+        // var axios = require('axios');
+        // var data = JSON.stringify({
+        //   "username": "ronan",
+        //   "phone": null
+        // });
+        //
+        // var config = {
+        //   method: 'post',
+        //   url: 'http://localhost/user/page?currentPage='+page+'&pageSize='+4,
+        //   headers: {
+        //     'User-Agent': 'Apifox/1.0.0 (https://apifox.com)',
+        //     'Content-Type': 'application/json'
+        //   },
+        //   data : data
+        // };
+        //
+        // axios(config)
+        //     .then(function (response) {
+        //       this.book =JSON.stringify(response.data);
+        //     })
+        //     .catch(function (error) {
+        //       console.log(error);
+        //     });
         this.count += 2
         this.loading = false
       }, 2000)
