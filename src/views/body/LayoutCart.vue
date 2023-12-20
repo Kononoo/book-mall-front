@@ -111,34 +111,34 @@ export default {
   },
 
   mounted() {
-    var axios = require('axios');
-    //获取用户信息
-    var getUserConfig = {
-      method: 'get',
-      url: 'http://localhost/user/',
-    }
-    axios(getUserConfig)
-      .then(function (response) {
-        var user = JSON.stringify(response.data);
-        this.userId = user.id;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    //获取购物车数据
-    var config = {
-      method: 'get',
-      url: 'http://localhost/cart/list?userId='+this.userId,
-      headers: {
-      }
-    };
-    axios(config)
-        .then(function (response) {
-          this.cartList = JSON.stringify(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    // var axios = require('axios');
+    // //获取用户信息
+    // var getUserConfig = {
+    //   method: 'get',
+    //   url: 'http://localhost/user/',
+    // }
+    // axios(getUserConfig)
+    //   .then(function (response) {
+    //     var user = JSON.stringify(response.data);
+    //     this.userId = user.id;
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    // //获取购物车数据
+    // var config = {
+    //   method: 'get',
+    //   url: 'http://localhost/cart/list?userId='+this.userId,
+    //   headers: {
+    //   }
+    // };
+    // axios(config)
+    //     .then(function (response) {
+    //       this.cartList = JSON.stringify(response.data);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
 
   },
 
