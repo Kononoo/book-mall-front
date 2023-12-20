@@ -6,7 +6,7 @@ pinia.use(persist)
 
 export default pinia
 
-// import {useUserStore} from "@/stores/modules/user";
+// import {useUserStore} from "@/stores/modules/User";
 // export {useUserStore}
 // import {useCounterStore} from "@/stores/modules/counter";
 // export {useCounterStore}

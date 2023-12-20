@@ -53,13 +53,36 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/Login/Login.vue')
+      component: () => import('@/views/Login/Login.vue')
     },
     // 管理员后台页面
     {
       path: '/admin',
       name: 'admin',
-      component: () => import('../views/Admin/Layout/Layout.vue')
+      component: () => import('@/views/Admin/Layout/Layout.vue'),
+      redirect: '/admin/category',
+      children: [
+        {
+          path: 'category',
+          component: () => import('@/views/Admin/Category/Category.vue'),
+          meta: { title: '图书分类' }
+        },
+        {
+          path: 'book',
+          component: () => import('@/views/Admin/Book/Book.vue'),
+          meta: { title: '图书管理' }
+        },
+        {
+          path: 'order',
+          component: () => import('@/views/Admin/Order/Order.vue'),
+          meta: { title: '订单管理' }
+        },
+        {
+          path: 'user',
+          component: () => import('@/views/Admin/User/UserManage.vue'),
+          meta: { title: '用户管理' }
+        }
+      ]
     }
   ]
 })

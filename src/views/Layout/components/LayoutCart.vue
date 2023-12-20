@@ -6,13 +6,7 @@ import LayoutNav from '@/views/Layout/components/LayoutNav.vue'
   <LayoutHeader />
   <LayoutNav />
   <div class="cartContainer">
-    <el-table
-        :data="cartList"
-        v-loading="isLoading"
-        @selection-change="selectionChange"
-        @select-all="selectAll"
-        ref="table"
-    >
+    <el-table :data="cartList" v-loading="isLoading" @selection-change="selectionChange" @select-all="selectAll" ref="table">
       <template #empty>
         <div class="empty">
           <span>购物车空空的，快去添加商品吧</span>
@@ -36,11 +30,7 @@ import LayoutNav from '@/views/Layout/components/LayoutNav.vue'
       <el-table-column prop="number" label="数量">
         <template #default="scope">
           <el-button @click="decrementQuantity(scope.row)">-</el-button>
-          <el-input
-              style="width: 50px;"
-              v-model="scope.row.number"
-              @change="handleQuantityChange(scope.row)"
-          ></el-input>
+          <el-input style="width: 50px" v-model="scope.row.number" @change="handleQuantityChange(scope.row)"></el-input>
           <el-button @click="incrementQuantity(scope.row)">+</el-button>
         </template>
       </el-table-column>
@@ -52,19 +42,15 @@ import LayoutNav from '@/views/Layout/components/LayoutNav.vue'
     </el-table>
     <div class="footer">
       <div class="left">
-        <el-checkbox
-            :label="toggleAllChecked ? '取消全选' : '全选'"
-            @change="selectAllChecked"
-            v-model="toggleAllChecked"
-        ></el-checkbox>
+        <el-checkbox :label="toggleAllChecked ? '取消全选' : '全选'" @change="selectAllChecked" v-model="toggleAllChecked"></el-checkbox>
         <el-button type="danger" :disabled="selectedCount === 0" @click="deleteSelected">删除</el-button>
       </div>
       <div class="right">
-                <span style="margin-right: 1rem"
-                >已选商品：<span style="font-size: 1.4rem">{{ selectedCount }}</span> 件</span
-                >
         <span style="margin-right: 1rem"
-        >合计（不含运费）：<span style="color: orange; font-size: 1.4rem">￥{{ totalPrice }}</span></span
+          >已选商品：<span style="font-size: 1.4rem">{{ selectedCount }}</span> 件</span
+        >
+        <span style="margin-right: 1rem"
+          >合计（不含运费）：<span style="color: orange; font-size: 1.4rem">￥{{ totalPrice }}</span></span
         >
         <el-button type="primary" :disabled="selectedCount === 0" @click="settleHandler">结算</el-button>
       </div>
@@ -73,172 +59,170 @@ import LayoutNav from '@/views/Layout/components/LayoutNav.vue'
 </template>
 
 <script>
-
-import service from "@/utils/request";
-
+import service from '@/utils/request'
 
 export default {
-  name: "CartView",
+  name: 'CartView',
   data() {
     return {
-      cartList: [{
-        orderID: 1,
-        coverImg: new URL("../../../assets/image/attack1.png",import.meta.url).href,
-        title: "Book 1",
-        author: "Author 1",
-        price: 20.00,
-        number: 1,
-        checked: false
-      },
+      cartList: [
         {
-          orderID: 2,
-          coverImg: new URL("../../../assets/image/attack2.png",import.meta.url).href,
-          title: "Book 2",
-          author: "Author 2",
-          price: 25.00,
+          orderID: 1,
+          coverImg: new URL('../../../assets/image/attack1.png', import.meta.url).href,
+          title: 'Book 1',
+          author: 'Author 1',
+          price: 20.0,
           number: 1,
           checked: false
-        },],
+        },
+        {
+          orderID: 2,
+          coverImg: new URL('../../../assets/image/attack2.png', import.meta.url).href,
+          title: 'Book 2',
+          author: 'Author 2',
+          price: 25.0,
+          number: 1,
+          checked: false
+        }
+      ],
       selectedCount: 0,
-      totalPrice: "0.00",
+      totalPrice: '0.00',
       isLoading: true,
       toggleAllChecked: false,
       currentPage: 1,
-      pageSize: 5,
-    };
+      pageSize: 5
+    }
   },
   methods: {
     // 点击减一按钮
     decrementQuantity(row) {
       if (row.number > 1) {
-        row.number--;
-        this.handleQuantityChange(row);
+        row.number--
+        this.handleQuantityChange(row)
       }
     },
     // 点击加一按钮
     incrementQuantity(row) {
-      row.number++;
-      this.handleQuantityChange(row);
+      row.number++
+      this.handleQuantityChange(row)
     },
     // 多选事件
     selectionChange(values) {
       // console.log(this.toggleAllChecked);
       console.log(values)
       this.cartList.forEach((item) => {
-        item.checked=false
-      });
-      let price = 0;
-      this.selectedCount = values.length;
+        item.checked = false
+      })
+      let price = 0
+      this.selectedCount = values.length
       values.forEach((item) => {
         item.checked = true
-        price += (item.price*item.number);
-      });
-      this.totalPrice = price.toFixed(2).toString();
+        price += item.price * item.number
+      })
+      this.totalPrice = price.toFixed(2).toString()
     },
     // 全选框事件
     selectAllChecked() {
-      this.$refs["table"].toggleAllSelection();
+      this.$refs['table'].toggleAllSelection()
     },
     // 删除当前行
     currentDelete(row) {
       // console.log(row.orderID);
       service({
-        method: "get",
+        method: 'get',
         url: `/order/delete?id=${row.orderID}`,
         headers: {
-          token: store.state.token,
-        },
+          token: store.state.token
+        }
       }).then(() => {
         ElMessage({
-          type: "success",
-          message: "删除成功",
-        });
-        this.refresh();
-      });
+          type: 'success',
+          message: '删除成功'
+        })
+        this.refresh()
+      })
     },
     // 删除选中行
     deleteSelected() {
-      let rows = this.$refs["table"].getSelectionRows();
+      let rows = this.$refs['table'].getSelectionRows()
       rows.forEach((item) => {
         service({
-          method: "get",
+          method: 'get',
           url: `/order/delete?id=${item.orderID}`, //根据id删除
           headers: {
-            token: store.state.token,
-          },
+            token: store.state.token
+          }
         }).then(() => {
-          this.refresh();
-        });
-      });
+          this.refresh()
+        })
+      })
       ElMessage({
-        type: "success",
-        message: "删除成功",
-      });
+        type: 'success',
+        message: '删除成功'
+      })
     },
     // 结算事件
     settleHandler() {
-      let rows = this.$refs["table"].getSelectionRows();
+      let rows = this.$refs['table'].getSelectionRows()
       rows.forEach((item) => {
         service.post(`/order/update`, { ...item, orderState: 2 }).then((res) => {
           // console.log(res);
-          this.$router.replace({ name: "settle" });
-        });
-      });
+          this.$router.replace({ name: 'settle' })
+        })
+      })
     },
     // 数量为0或空时自动设为1
     handleQuantityChange(row) {
       console.log(row)
       if (parseInt(row.number) <= 0 || row.number === '') {
-        row.number = 1;
+        row.number = 1
       }
-      let price = 0;
+      let price = 0
       this.cartList.forEach((item) => {
-        if (item.checked)
-        {
-          price += item.price * item.number;
+        if (item.checked) {
+          price += item.price * item.number
         }
-      });
-      this.totalPrice = price.toFixed(2).toString();
-
+      })
+      this.totalPrice = price.toFixed(2).toString()
     },
     refresh() {
-      let userID = store.state.userInfo.userID;
+      let userID = store.state.userInfo.userID
       service({
-        method: "get",
+        method: 'get',
         url: `/order/selectById/${userID}?orderState=1`,
         headers: {
-          token: store.state.token,
-        },
+          token: store.state.token
+        }
       }).then((res) => {
-        console.log(res.data);
+        console.log(res.data)
         res.data.forEach((item) => {
-          Object.assign(item, ...item.book, item);
-          delete item["book"];
+          Object.assign(item, ...item.book, item)
+          delete item['Book']
           // console.log(item);
-        });
-        this.cartList = res.data;
+        })
+        this.cartList = res.data
         // console.log(this.cartList);
-      });
-    },
+      })
+    }
   },
   watch: {
     // 监听选中数量并更改全选框状态
     selectedCount(oldVal) {
       if (oldVal === this.cartList.length) {
-        this.toggleAllChecked = true;
+        this.toggleAllChecked = true
       } else {
-        this.toggleAllChecked = false;
+        this.toggleAllChecked = false
       }
       // console.log(this.toggleAllChecked);
-    },
+    }
   },
   async beforeMount() {
     // orderState=1时为待付款状态
-    this.isLoading = true;
+    this.isLoading = true
     // await this.refresh();  测试时注释防止不断刷新数据
-    this.isLoading = false;
-  },
-};
+    this.isLoading = false
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { userGetInfoAPI } from '@/api/user.js'
 
 export const useUserStore = defineStore(
-  'book-user',
+  'Book-User',
   () => {
     const token = ref('')
     const setToken = (newToken) => {
