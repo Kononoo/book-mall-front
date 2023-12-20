@@ -19,29 +19,28 @@ const router = createRouter({
       component: () => import('@/views/Layout/Layout.vue'),
       children:[{
         path:'/',
-        component:()=>import("@/views/Layout/components/LayoutHome.vue")},{
+        component:()=>import("@/views/body/LayoutHome.vue")},{
         path:'/home',
         name:'home',
-        component:()=>import("@/views/Layout/components/LayoutHome.vue")}, {
+        component:()=>import("@/views/body/LayoutHome.vue")}, {
         path:'address',
         name:'address',
-        component:()=>import("@/views/Layout/components/LayoutAddress.vue")},{
+        component:()=>import("@/views/body/LayoutAddress.vue")},{
         path:'category',
         name:'category',
-        component:()=>import("@/views/Layout/components/LayoutCategory.vue")},{
+        component:()=>import("@/views/body/LayoutCategory.vue")},{
         path:'order',
         name:'order',
-        component:()=>import("@/views/Layout/components/LayoutOrder.vue")},
-
-
-
-      ]
+        component:()=>import("@/views/body/LayoutOrder.vue")},{
+        path:'detail',
+        name:'detail',
+        component:()=>import("@/views/body/LayoutDetail.vue")}]
     },
     {
       path:'/cart',
       name:'cart',
-      component:()=>import("@/views/Layout/components/LayoutCart.vue")
-    },
+      component:()=>import("@/views/body/LayoutCart.vue")},
+
     {
       path: '/login',
       name: 'login',

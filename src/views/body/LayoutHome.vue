@@ -24,7 +24,7 @@
           <li v-for="i in count" class="list-item">
             <el-row>
               <el-col :span="8" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 2 : 0">
-                <a href="/login">
+                <a href="/detail">
                 <el-card :body-style="{ padding: '20px' }" shadow="hover" class="BookCard">
                   <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image" alt="">
                   <div style="padding: 1px;">

@@ -125,7 +125,7 @@
 </template>
 
 <script>
-import service from "@/utils/request";
+import service from "@/utils/request.js";
 import {ElMessage} from "element-plus";
 import pca from '@/assets/adress/pca-code.json';
 

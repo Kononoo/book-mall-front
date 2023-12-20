@@ -1,0 +1,64 @@
+<script setup>
+</script>
+
+<template>
+  <div class="container">
+    <el-row class="row-bg">
+      <el-col :span="6"><img src="../../assets/image/card1.jpeg" alt=""></el-col>
+      <el-col :span="6">
+        <ul>
+          <li>书籍名称：</li>
+          <li>作者：</li>
+          <li>图书种类：</li>
+        </ul>
+      </el-col>
+    </el-row>
+    <el-row class="row-bg" justify="center">
+      <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+      <el-col :span="6"><div class="grid-content ep-bg-purple-light" /></el-col>
+      <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+    </el-row>
+    <el-row class="row-bg" justify="end">
+      <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+      <el-col :span="6"><div class="grid-content ep-bg-purple-light" /></el-col>
+      <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+    </el-row>
+    <el-row class="row-bg" justify="space-between">
+      <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+      <el-col :span="6"><div class="grid-content ep-bg-purple-light" /></el-col>
+      <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+    </el-row>
+    <el-row class="row-bg" justify="space-around">
+      <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+      <el-col :span="6"><div class="grid-content ep-bg-purple-light" /></el-col>
+      <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+    </el-row>
+    <el-row class="row-bg" justify="space-evenly">
+      <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+      <el-col :span="6"><div class="grid-content ep-bg-purple-light" /></el-col>
+      <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+    </el-row>
+  </div>
+</template>
+
+<style>
+.el-row {
+  margin-bottom: 20px;
+}
+.el-row:last-child {
+  margin-bottom: 0;
+}
+.el-col {
+  border-radius: 4px;
+}
+
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+</style>
+
+
+<style scoped lang="scss">
+
+</style>

@@ -74,7 +74,7 @@ import LayoutNav from '@/views/Layout/components/LayoutNav.vue'
 
 <script>
 
-import service from "@/utils/request";
+import service from "@/utils/request.js";
 
 
 export default {
