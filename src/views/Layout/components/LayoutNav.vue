@@ -9,16 +9,16 @@
         <el-menu-item class="logo" disabled>
           <span>米莉在线书城</span>
         </el-menu-item>
-        <el-menu-item index="/">首页</el-menu-item>
+        <el-menu-item index="/home" @click="jumpto('/')">首页</el-menu-item>
         <el-sub-menu index="/category">
           <template #title>图书类别</template>
           <el-menu-item v-for="item in categoryList" :key="item" :index="'/category?categoryID=' + item.categoryID + '&category=' + item.category">
             {{ item.category }}
           </el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="/cart">购物车</el-menu-item>
-        <el-menu-item index="/order">我的订单</el-menu-item>
-        <el-menu-item index="/address">收货地址 </el-menu-item>
+        <el-menu-item index="/cart" @click="jumpto('/address')">购物车</el-menu-item>
+        <el-menu-item index="/order" @click="jumpto('/order')">我的订单</el-menu-item>
+        <el-menu-item index="/address" @click="jumpto('/address')">收货地址 </el-menu-item>
         <!-- 搜索框 -->
         <div style="flex-grow: 1"></div>
         <div class="searchInput">
@@ -96,3 +96,8 @@
 }
 </style>
 
+<script>
+  function jumpto(path){
+    this.$router.release(path)
+  }
+</script>
