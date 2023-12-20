@@ -69,13 +69,16 @@ const login = async () => {
   console.log('开始登录')
   const res = await userLoginAPI(formModel)
   // 保存用户token和用户信息
+  console.log(res)
   userStore.setToken(res.data.token)
+  console.log(res.data.data)
   userStore.setUserInfo(res.data.data)
   ElMessage.success('登录成功')
   if (res.data.data.role === 1) {
     await router.push('/admin')
+  } else {
+    await router.push('/')
   }
-  await router.push('/')
 }
 // 切换页面时清空数据
 watch(isRegister, () => {
@@ -97,10 +100,10 @@ watch(isRegister, () => {
           <el-input v-model="formModel.username" :prefix-icon="User" placeholder="请输入用户名" />
         </el-form-item>
         <el-form-item label="密码：" prop="password">
-          <el-input v-model="formModel.password" :prefix-icon="Lock" placeholder="请输入密码" type="password" />
+          <el-input v-model="formModel.password" :prefix-icon="Lock" placeholder="请输入密码" type="password" show-password />
         </el-form-item>
         <el-form-item label="密码：" prop="repassword">
-          <el-input v-model="formModel.repassword" :prefix-icon="Lock" placeholder="请再次输入密码" type="password" />
+          <el-input v-model="formModel.repassword" :prefix-icon="Lock" placeholder="请再次输入密码" type="password" show-password />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="register" class="button" auto-insert-space>注册</el-button>
@@ -115,10 +118,10 @@ watch(isRegister, () => {
           <h1 style="text-align: center">登录</h1>
         </el-form-item>
         <el-form-item prop="username">
-          <el-input v-model="formModel.username" :prefix-icon="User" placeholder="请输入用户名" />
+          <el-input v-model="formModel.username" :prefix-icon="User" placeholder="请输入用户名" autocomplete="true" />
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="formModel.password" :prefix-icon="Lock" placeholder="请输入密码" name="password" type="password" />
+          <el-input v-model="formModel.password" :prefix-icon="Lock" placeholder="请输入密码" name="password" type="password" show-password />
         </el-form-item>
         <el-form-item class="flex">
           <div class="flex">

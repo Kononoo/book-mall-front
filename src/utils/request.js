@@ -13,10 +13,13 @@ httpInstance.interceptors.request.use(
   (config) => {
     // 将token携带进请求头中(axios会携带请求头)
     const userStore = useUserStore()
-    if (userStore.token) {
+    const token = localStorage.getItem('token')
+    if (token) {
       // 请求头的 Authorization 加上 token 数据, 后端通过 request.getHeaders("Authorization")来获取
       config.headers.Authorization = userStore.token
       // config.headers.Authorization = `Bearer ${token}`
+    } else if (userStore.token) {
+      config.headers.Authorization = token
     }
     return config
   },
@@ -29,7 +32,7 @@ httpInstance.interceptors.request.use(
 // 添加响应拦截器
 httpInstance.interceptors.response.use(
   (res) => {
-    if (res.data.code === 0) {
+    if (res.data.code === 1) {
       return res
     } else {
       ElMessage({

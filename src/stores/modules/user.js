@@ -8,9 +8,11 @@ export const useUserStore = defineStore(
     const token = ref('')
     const setToken = (newToken) => {
       token.value = newToken
+      localStorage.setItem('token', newToken)
     }
     const removeToken = () => {
       token.value = ''
+      localStorage.removeItem('token')
     }
 
     const user = ref({})
@@ -18,8 +20,10 @@ export const useUserStore = defineStore(
       const res = await userGetInfoAPI()
       user.value = res.data.data
     }
-    const setUserInfo = (user) => {
-      user.value = user
+    const setUserInfo = (userInfo) => {
+      console.log('接收到的user:', userInfo)
+      user.value = userInfo
+      console.log('设置pinia:', user.value)
     }
     return {
       token,

@@ -7,7 +7,8 @@ const confirm = () => {
   console.log('用户退出登录')
   // 1 清除用户信息
   userStore.removeToken()
-  userStore.setUser({})
+
+  userStore.setUserInfo({})
   // 2 返回到登录页
   // router.replace({path: '/login'})
   setTimeout(() => {
@@ -37,9 +38,9 @@ const confirm = () => {
         </template>
         <template v-else>
           <li><a href="javascript:;" @click="$router.push('/login')">请先登录</a></li>
-          <!--          <router-link to="/login">-->
-          <!--            <a href="javascript:;">退出登录</a>-->
-          <!--          </router-link>-->
+          <!--                    <router-link to="/login">-->
+          <!--                      <a href="javascript:;">退出登录</a>-->
+          <!--                    </router-link>-->
           <li><a href="javascript:;">帮助中心</a></li>
           <li><a href="javascript:;">关于我们</a></li>
         </template>
