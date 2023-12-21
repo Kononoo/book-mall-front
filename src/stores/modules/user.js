@@ -5,6 +5,8 @@ import { userGetInfoAPI } from '@/api/user.js'
 export const useUserStore = defineStore(
   'Book-User',
   () => {
+    // 定义管理用户数据的state和操作数据的action
+
     const token = ref('')
     const setToken = (newToken) => {
       token.value = newToken
@@ -34,9 +36,9 @@ export const useUserStore = defineStore(
       setUserInfo
     }
   },
-  // 数据持久化存储
-  // 原理：设置state时会把数据自动同步给localStorage，获取数据时优先从localStorage获取
   {
+    // 数据持久化存储
+    // 原理：设置state时会把数据自动同步给localStorage，获取数据时优先从localStorage获取
     persist: true
   }
 )

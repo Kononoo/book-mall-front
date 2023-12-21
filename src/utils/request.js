@@ -37,7 +37,7 @@ httpInstance.interceptors.response.use(
     } else {
       ElMessage({
         type: 'error',
-        message: res.data.msg || '服务异常'
+        message: res.data?.msg || '服务异常'
       })
     }
     // 处理业务失败，给出错误提示
@@ -48,7 +48,7 @@ httpInstance.interceptors.response.use(
     // 当且仅当.response.data 存在时，它将返回 e.response.data.msg。如果其中任何一部分不存在，整个表达式将返回服务异常
     ElMessage({
       type: 'error',
-      message: e.response.data?.msg || '服务异常'
+      message: e.response?.data?.msg || '服务异常'
     })
     // 401 token失效 或 session过期 处理
     // 1 清除本地数据   2 跳转登录页

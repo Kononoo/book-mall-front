@@ -34,7 +34,7 @@ const onCommand = async (command) => {
   <el-container class="layout-container">
     <el-aside width="180px">
       <div class="el-aside__logo"></div>
-      <el-menu background-color="#343744" text-color="#bfcbd9" active-text-color="#27ba9b" default-active="/admin/category" router>
+      <el-menu background-color="#343744" text-color="#bfcbd9" active-text-color="#27ba9b" :default-active="$route.path" router>
         <el-menu-item index="/admin/category">
           <el-icon>
             <Management />
@@ -114,7 +114,7 @@ const onCommand = async (command) => {
 .layout-container {
   height: 100vh;
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
   .el-aside {
     background-color: #343744;
 
@@ -130,7 +130,7 @@ const onCommand = async (command) => {
   }
 
   .el-header {
-    background-color: #fff;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: space-between;

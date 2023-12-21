@@ -33,16 +33,15 @@ export const bookListAPI = (keyWord) => {
   return httpInstance({
     url: '/book/list',
     method: 'GET',
-    params: { keyWord }
+    params: keyWord
   })
 }
 
 // 条件分页查询
-export const bookPageAPI = ({ currentPage, pageSize, data }) => {
+export const bookPageAPI = ({ currentPage, pageSize, keyWord }) => {
   return httpInstance({
     url: '/book/page',
     method: 'GET',
-    params: { currentPage, pageSize },
-    data
+    params: { currentPage, pageSize, keyWord }
   })
 }
