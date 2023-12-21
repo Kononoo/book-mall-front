@@ -36,7 +36,9 @@ const confirm = () => {
           </li>
           <li><a href="javascript:;" @click="router.push('/cartlist')">我的订单</a></li>
           <li><a href="javascript:;" @click="router.push('/')">会员中心</a></li>
-          <li><el-avatar :src="userStore.user.avatar || avatar"></el-avatar></li>
+          <li style="margin-left: 5px">
+            <a href="javascript:;"><el-avatar :src="userStore.user.avatar || avatar"></el-avatar></a>
+          </li>
         </template>
         <template v-else>
           <li><a href="javascript:;" @click="$router.push('/login')">请先登录</a></li>

@@ -7,12 +7,22 @@ import { ElMessage } from 'element-plus'
 import { userLoginAPI, userRegisterAPI } from '@/api/user'
 
 const form = ref() // 通过ref获取组件实例，然后获取Expose暴露出去的方法
+const remember = ref()
 const isRegister = ref(false)
 const formModel = reactive({
   username: '',
   password: '',
   repassword: ''
 })
+// 读取保存的账户
+const readInfo = () => {
+  if (localStorage.getItem('user')) {
+    formModel.username = localStorage.getItem('user')
+  } else if (localStorage.getItem('pass')) {
+    formModel.password = localStorage.getItem('pass')
+  }
+}
+readInfo()
 
 const rules = {
   username: [
@@ -64,6 +74,10 @@ const login = async () => {
     await router.push('/admin')
   } else {
     await router.push('/')
+  }
+  if (remember.value) {
+    localStorage.setItem('user', formModel.username)
+    localStorage.setItem('pass', formModel.password)
   }
 }
 // 切换页面时清空数据
@@ -125,7 +139,7 @@ const afterLeave = () => {}
           </el-form-item>
           <el-form-item class="flex">
             <div class="flex">
-              <el-checkbox>记住我</el-checkbox>
+              <el-checkbox v-model="remember">记住我</el-checkbox>
               <el-link ref="" type="primary" :underline="true">忘记密码</el-link>
             </div>
           </el-form-item>

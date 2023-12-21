@@ -17,7 +17,7 @@
         </dl>
         <dl>
           <dt>下载APP</dt>
-          <dd class="qrcode"><img src="@/assets/image/qrcode.jpg" /></dd>
+          <dd class="qrcode"><img src="@/assets/image/qrcode.jpg" style="width: 92px; height: 92px" /></dd>
           <dd class="download">
             <span>扫描二维码</span>
             <span>立马下载APP</span>
@@ -94,6 +94,9 @@
       &:last-child {
         border-right: none;
         padding-right: 0;
+      }
+      dd {
+        cursor: pointer;
       }
     }
 

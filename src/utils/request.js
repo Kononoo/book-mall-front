@@ -14,12 +14,13 @@ httpInstance.interceptors.request.use(
     // 将token携带进请求头中(axios会携带请求头)
     const userStore = useUserStore()
     const token = localStorage.getItem('token')
-    if (token) {
-      // 请求头的 Authorization 加上 token 数据, 后端通过 request.getHeaders("Authorization")来获取
-      config.headers.Authorization = userStore.token
+    if (userStore.token) {
       // config.headers.Authorization = `Bearer ${token}`
-    } else if (userStore.token) {
+      config.headers.Authorization = userStore.token
+    } else if (token) {
+      // 请求头的 Authorization 加上 token 数据, 后端通过 request.getHeaders("Authorization")来获取
       config.headers.Authorization = token
+      // config.headers.Authorization = `Bearer ${token}`
     }
     return config
   },
