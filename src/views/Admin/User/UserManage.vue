@@ -1,5 +1,7 @@
 <script setup></script>
 
-<template></template>
+<template>
+  <h1>UserManage</h1>
+</template>
 
 <style scoped lang="scss"></style>

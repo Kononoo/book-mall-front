@@ -59,51 +59,27 @@ import LayoutNav from '@/views/Layout/components/LayoutNav.vue'
 </template>
 
 <script>
-<<<<<<< HEAD:src/views/Layout/components/LayoutCart.vue
-import service from '@/utils/request'
-=======
-
-import service from "@/utils/request.js";
-import axios from "axios";
-
->>>>>>> 19ec3959f82568d7c66b67d10f9c6d3912d7c085:src/views/body/LayoutCart.vue
+import service from '@/utils/request.js'
+import axios from 'axios'
 
 export default {
   name: 'CartView',
   data() {
     return {
-<<<<<<< HEAD:src/views/Layout/components/LayoutCart.vue
+      userId: null,
       cartList: [
         {
           orderID: 1,
-          coverImg: new URL('../../../assets/image/attack1.png', import.meta.url).href,
+          coverImg: new URL('@/assets/image/attack1.png', import.meta.url).href,
           title: 'Book 1',
           author: 'Author 1',
           price: 20.0,
-=======
-      userId:null,
-      cartList: [{
-        orderID: 1,
-        coverImg: new URL("@/assets/image/attack1.png",import.meta.url).href,
-        title: "Book 1",
-        author: "Author 1",
-        price: 20.00,
-        number: 1,
-        checked: false
-      },
-        {
-          orderID: 2,
-          coverImg: new URL("@/assets/image/attack2.png",import.meta.url).href,
-          title: "Book 2",
-          author: "Author 2",
-          price: 25.00,
->>>>>>> 19ec3959f82568d7c66b67d10f9c6d3912d7c085:src/views/body/LayoutCart.vue
           number: 1,
           checked: false
         },
         {
           orderID: 2,
-          coverImg: new URL('../../../assets/image/attack2.png', import.meta.url).href,
+          coverImg: new URL('@/assets/image/attack2.png', import.meta.url).href,
           title: 'Book 2',
           author: 'Author 2',
           price: 25.0,
@@ -149,7 +125,6 @@ export default {
     //     .catch(function (error) {
     //       console.log(error);
     //     });
-
   },
 
   methods: {
@@ -226,14 +201,9 @@ export default {
       rows.forEach((item) => {
         service.post(`/order/update`, { ...item, orderState: 2 }).then((res) => {
           // console.log(res);
-<<<<<<< HEAD:src/views/Layout/components/LayoutCart.vue
           this.$router.replace({ name: 'settle' })
         })
       })
-=======
-          this.$router.replace({ name: "settle" });
-        });
-      });
       //清空购物车
       // var shopConfig = {
       //   method: 'delete',
@@ -250,7 +220,6 @@ export default {
       //     .catch(function (error) {
       //       console.log(error);
       //     });
->>>>>>> 19ec3959f82568d7c66b67d10f9c6d3912d7c085:src/views/body/LayoutCart.vue
     },
     // 数量为0或空时自动设为1
     handleQuantityChange(row) {
@@ -278,7 +247,7 @@ export default {
         console.log(res.data)
         res.data.forEach((item) => {
           Object.assign(item, ...item.book, item)
-          delete item['Book']
+          delete item['book']
           // console.log(item);
         })
         this.cartList = res.data

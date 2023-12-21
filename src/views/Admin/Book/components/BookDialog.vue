@@ -143,7 +143,7 @@ defineExpose({ open })
             <el-input v-model.number="formData.stock" placeholder="请输入图书库存" />
           </el-form-item>
           <el-form-item label="图书描述" prop="description">
-            <el-input v-model="formData.description" type="textarea" :rows="6" placeholder="请输入图书描述" />
+            <el-input v-model="formData.description" type="textarea" :rows="10" placeholder="请输入图书描述" />
           </el-form-item>
         </el-col>
       </el-row>

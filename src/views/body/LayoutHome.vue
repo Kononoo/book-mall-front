@@ -18,23 +18,23 @@
       </div>
       <div class="infinite-list-wrapper" style="overflow:auto;text-align: center">
         <ul
-            class="list"
-            v-infinite-scroll="load"
-            infinite-scroll-disabled="disabled">
+          class="list"
+          v-infinite-scroll="load"
+          infinite-scroll-disabled="disabled">
           <li v-for="i in count" class="list-item">
             <el-row>
               <el-col :span="8" v-for="book in books" :key="book" :offset="index > 0 ? 2 : 0">
                 <a href="/detail/id=1">
-                <el-card :body-style="{ padding: '20px' }" shadow="hover" class="BookCard">
-                  <img :src=book.coverImg class="image" alt="">
-                  <div style="padding: 1px;">
-                    <div style="font-size: 15px">{{book.name}}</div>
-                    <div style="font-size: 15px">{{book.price}}</div>
-                    <div class="bottom clearfix">
-                      <time class="time">{{ currentDate }}</time>
+                  <el-card :body-style="{ padding: '20px' }" shadow="hover" class="BookCard">
+                    <img :src=book.coverImg class="image" alt="">
+                    <div style="padding: 1px;">
+                      <div style="font-size: 15px">{{book.name}}</div>
+                      <div style="font-size: 15px">{{book.price}}</div>
+                      <div class="bottom clearfix">
+                        <time class="time">{{ currentDate }}</time>
+                      </div>
                     </div>
-                  </div>
-                </el-card>
+                  </el-card>
                 </a>
               </el-col>
             </el-row>
@@ -92,16 +92,16 @@
 }
 
 
- .el-col-offset-2 {
-   margin-left: 1%;
-   margin-bottom: 1%;
- }
+.el-col-offset-2 {
+  margin-left: 1%;
+  margin-bottom: 1%;
+}
 
- .message{
-   display: block;
-   padding-top: 10px;
-   font-size: 22px;
- }
+.message{
+  display: block;
+  padding-top: 10px;
+  font-size: 22px;
+}
 </style>
 <script>
 export default {

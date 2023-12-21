@@ -10,9 +10,9 @@
       </div>
       <div class="infinite-list-wrapper" style="overflow:auto;text-align: center">
         <ul
-            class="list"
-            v-infinite-scroll="load"
-            infinite-scroll-disabled="disabled">
+          class="list"
+          v-infinite-scroll="load"
+          infinite-scroll-disabled="disabled">
           <li v-for="i in count" class="list-item">
             <el-row>
               <el-col :span="8" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 2 : 0">
