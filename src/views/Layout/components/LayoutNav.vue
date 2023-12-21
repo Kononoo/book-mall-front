@@ -1,10 +1,15 @@
 <script setup>
-const categoryList = [
-  { categoryID: 1, category: '分类1' },
-  { categoryID: 2, category: '分类2' },
-  { categoryID: 3, category: '分类3' },
-  { categoryID: 4, category: '分类4' }
-]
+import { ref } from 'vue'
+import { Search } from '@element-plus/icons-vue'
+import { categoryListAPI } from '@/api/category.js'
+
+const categoryList = ref([])
+const getCategoryList = async () => {
+  const res = await categoryListAPI()
+  categoryList.value = res.data.data
+  console.log(categoryList)
+}
+getCategoryList()
 
 const jumpTo = (path) => {
   this.$router.push({ path: path })
@@ -15,27 +20,27 @@ const jumpTo = (path) => {
 <template>
   <div class="navigation" style="background-color: #fff">
     <div class="container">
-      <el-menu class="" mode="horizontal" :default-active="activeIndex" :ellipsis="false" unique-opened router @select="pageChangeHandler">
+      <el-menu class="" mode="horizontal" :default-active="$route.path" :ellipsis="false" unique-opened router @select="pageChangeHandler">
         <!-- 主菜单 -->
         <el-menu-item class="logo" disabled>
           <span>米莉在线书城</span>
         </el-menu-item>
-        <el-menu-item index="/home" @click="jumpTo('/')">首页</el-menu-item>
+        <el-menu-item index="/home" @click="$router.push('/home')">首页</el-menu-item>
         <el-sub-menu index="/category">
           <template #title>图书类别</template>
-          <el-menu-item v-for="item in categoryList" :key="item" @click="jumpTo('/category/' + item.category)">
-            {{ item.category }}
+          <el-menu-item v-for="item in categoryList" :key="item.id" @click="jumpTo('/category/' + item.id)">
+            {{ item.name }}
           </el-menu-item>
         </el-sub-menu>
         <el-menu-item index="/cart" @click="jumpTo('/cart')">购物车</el-menu-item>
-        <el-menu-item index="/order" @click="jumpTo('/order')">我的订单</el-menu-item>
+        <el-menu-item index="/order" @click="$router.push('/order')">我的订单</el-menu-item>
         <el-menu-item index="/address" @click="jumpTo('/address')">收货地址 </el-menu-item>
         <!-- 搜索框 -->
         <div style="flex-grow: 1"></div>
         <div class="searchInput">
           <el-autocomplete
             placeholder="搜索"
-            :suffix-icon="searchIcon"
+            :suffix-icon="Search"
             v-model="searchText"
             :fetch-suggestions="fetchSuggestionsHandler"
             :trigger-on-focus="true"

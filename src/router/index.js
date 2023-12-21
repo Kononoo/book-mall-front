@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/stores/index.js'
 
 // createRouter 创建路由实例，===> new VueRouter()
 // 1. history模式: createWebHistory()   http://xxx/user
@@ -17,11 +18,8 @@ const router = createRouter({
       path: '/',
       name: 'Layout',
       component: () => import('@/views/Layout/Layout.vue'),
+      redirect: '/home',
       children: [
-        {
-          path: '/',
-          component: () => import('@/views/body/LayoutHome.vue')
-        },
         {
           path: '/home',
           name: 'home',
@@ -43,16 +41,16 @@ const router = createRouter({
           component: () => import('@/views/body/LayoutDetail.vue')
         },
         {
+          path: 'cart',
+          name: 'cart',
+          component: () => import('@/views/body/LayoutCart.vue')
+        },
+        {
           path: 'category/:category',
           name: 'category',
           component: () => import('@/views/body/LayoutCategory.vue')
         }
       ]
-    },
-    {
-      path: '/cart',
-      name: 'cart',
-      component: () => import('@/views/body/LayoutCart.vue')
     },
     {
       path: '/login',
@@ -89,6 +87,24 @@ const router = createRouter({
       ]
     }
   ]
+})
+
+// 路由守卫，管理页面只能管理员进
+router.beforeEach((to, from, next) => {
+  // 检查是否是访问 /admin 下的页面
+  if (to.path.startsWith('/admin')) {
+    // 检查用户角色是否为管理员
+    const userStore = useUserStore()
+    if (userStore.user && userStore.user.role === 1) {
+      // 用户角色为管理员，放行
+      next()
+    } else {
+      // 用户角色不是管理员，可以根据需求进行跳转或其他处理
+      next('/') // 重定向到首页，你也可以跳转到登录页或其他页面
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

@@ -21,7 +21,7 @@ const params = ref({
 
 // 是否继续加载
 const noMore = computed(() => {
-  return count.value >= 50
+  return count.value >= 100
 })
 const disabled = computed(() => {
   return loading.value || noMore.value
@@ -107,7 +107,7 @@ const load = () => {
       <div class="book-list">
         <el-row :gutter="20">
           <el-col :span="6" v-for="book in bookList" :key="book.id">
-            <a :href="`/detail/id=${book.id}`">
+            <a :href="`/detail/${book.id}`">
               <el-card shadow="hover" class="book-card">
                 <img :src="book.image" class="book-image" alt="" />
                 <div class="book-info">

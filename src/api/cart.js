@@ -1,6 +1,6 @@
 import httpInstance from '@/utils/request.js'
 
-// 添加购物车商品  data={ bookID, bookCount }
+// 添加购物车商品  data={ bookId, bookCount }
 export const shoppingCartAdd = (data) => {
   return httpInstance({
     url: '/cart/add',
@@ -9,20 +9,21 @@ export const shoppingCartAdd = (data) => {
   })
 }
 
-// 删除购物车商品 登录后才能查看  data={ bookID, bookCount }
+// 修改购物车商品 登录后才能查看  data={ userId bookID, bookCount }
 export const shoppingCartDel = (data) => {
   return httpInstance({
     url: '/cart',
-    method: 'DELETE',
+    methods: 'PUT',
     data
   })
 }
 
 // 查看购物车商品
-export const shoppingCartList = () => {
+export const shoppingCartList = (userId) => {
   return httpInstance({
     url: '/cart/list',
-    method: 'GET'
+    method: 'GET',
+    params: { userId }
   })
 }
 

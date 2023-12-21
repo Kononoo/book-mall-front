@@ -34,7 +34,7 @@ const confirm = () => {
               </template>
             </el-popconfirm>
           </li>
-          <li><a href="javascript:;" @click="router.push('/cartlist')">我的订单</a></li>
+          <li><a href="javascript:;" @click="router.push('/order')">我的订单</a></li>
           <li><a href="javascript:;" @click="router.push('/')">会员中心</a></li>
           <li style="margin-left: 5px">
             <a href="javascript:;"><el-avatar :src="userStore.user.avatar || avatar"></el-avatar></a>

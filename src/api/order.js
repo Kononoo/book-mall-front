@@ -19,7 +19,7 @@ export const orderPageAPI = ({ currentPage, pageSize, data }) => {
   })
 }
 
-// 根据用户Id进行订单查询，返回订单列表数据  userId可传可不传
+// 根据用户Id进行订单查询，返回订单列表数据  userId可传可不传 返回List
 export const orderGetAPI = (userId) => {
   return httpInstance({
     url: '/order',
