@@ -16,7 +16,7 @@
             {{ item.category }}
           </el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="/cart" @click="jumpto('/address')">购物车</el-menu-item>
+        <el-menu-item index="/cart" @click="jumpto('/cart')">购物车</el-menu-item>
         <el-menu-item index="/order" @click="jumpto('/order')">我的订单</el-menu-item>
         <el-menu-item index="/address" @click="jumpto('/address')">收货地址 </el-menu-item>
         <!-- 搜索框 -->
