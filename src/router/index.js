@@ -17,43 +17,47 @@ const router = createRouter({
       path: '/',
       name: 'Layout',
       component: () => import('@/views/Layout/Layout.vue'),
-      // 商城首页内容
       children: [
         {
           path: '/',
-          component: () => import('@/views/Layout/components/LayoutHome.vue')
+          component: () => import('@/views/body/LayoutHome.vue')
         },
         {
           path: '/home',
           name: 'home',
-          component: () => import('@/views/Layout/components/LayoutHome.vue')
+          component: () => import('@/views/body/LayoutHome.vue')
         },
         {
           path: 'address',
           name: 'address',
-          component: () => import('@/views/Layout/components/LayoutAddress.vue')
-        },
-        {
-          path: 'category',
-          name: 'category',
-          component: () => import('@/views/Layout/components/LayoutCategory.vue')
+          component: () => import('@/views/body/LayoutAddress.vue')
         },
         {
           path: 'order',
           name: 'order',
-          component: () => import('@/views/Layout/components/LayoutOrder.vue')
+          component: () => import('@/views/body/LayoutOrder.vue')
+        },
+        {
+          path: 'detail/:id',
+          name: 'detail',
+          component: () => import('@/views/body/LayoutDetail.vue')
+        },
+        {
+          path: 'category/:category',
+          name: 'category',
+          component: () => import('@/views/body/LayoutCategory.vue')
         }
       ]
     },
     {
       path: '/cart',
       name: 'cart',
-      component: () => import('@/views/Layout/components/LayoutCart.vue')
+      component: () => import('@/views/body/LayoutCart.vue')
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/Login/Login.vue')
+      component: () => import('../views/Login/Login.vue')
     },
     // 管理员后台页面
     {

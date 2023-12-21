@@ -1,4 +1,16 @@
-<script setup></script>
+<script setup>
+const categoryList = [
+  { categoryID: 1, category: '分类1' },
+  { categoryID: 2, category: '分类2' },
+  { categoryID: 3, category: '分类3' },
+  { categoryID: 4, category: '分类4' }
+]
+
+const jumpTo = (path) => {
+  this.$router.push({ path: path })
+  console.log(path)
+}
+</script>
 
 <template>
   <div class="navigation" style="background-color: #fff">
@@ -8,16 +20,16 @@
         <el-menu-item class="logo" disabled>
           <span>米莉在线书城</span>
         </el-menu-item>
-        <el-menu-item index="/home" @click="jumpto('/')">首页</el-menu-item>
+        <el-menu-item index="/home" @click="jumpTo('/')">首页</el-menu-item>
         <el-sub-menu index="/category">
           <template #title>图书类别</template>
-          <el-menu-item v-for="item in categoryList" :key="item" :index="'/Category?categoryID=' + item.categoryID + '&Category=' + item.category">
+          <el-menu-item v-for="item in categoryList" :key="item" @click="jumpTo('/category/' + item.category)">
             {{ item.category }}
           </el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="/cart" @click="jumpto('/address')">购物车</el-menu-item>
-        <el-menu-item index="/order" @click="jumpto('/Order')">我的订单</el-menu-item>
-        <el-menu-item index="/address" @click="jumpto('/address')">收货地址 </el-menu-item>
+        <el-menu-item index="/cart" @click="jumpTo('/cart')">购物车</el-menu-item>
+        <el-menu-item index="/order" @click="jumpTo('/order')">我的订单</el-menu-item>
+        <el-menu-item index="/address" @click="jumpTo('/address')">收货地址 </el-menu-item>
         <!-- 搜索框 -->
         <div style="flex-grow: 1"></div>
         <div class="searchInput">
@@ -87,16 +99,10 @@
 
   .searchInput {
     position: relative;
-    width: 40rem;
+    width: 300px;
     margin-top: 14px;
     height: 50%;
     align-items: center;
   }
 }
 </style>
-
-<script>
-function jumpto(path) {
-  this.$router.release(path)
-}
-</script>

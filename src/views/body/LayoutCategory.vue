@@ -1,20 +1,12 @@
 <script setup>
+
 </script>
 
 <template>
-  <div class="BookCard" style="padding-top: 20px">
-    <el-carousel :interval="4000" type="card" height="300px">
-      <el-carousel-item v-for="item in card" :key="item">
-        <!--          <h3 class="medium">{{ item }}</h3>-->
-        <img v-bind:src="item.src" alt="">
-      </el-carousel-item>
-    </el-carousel>
-  </div>
   <div class="container">
-
     <div class="data-home">
       <div class="container" style="margin-bottom: 20px">
-        <h1 style="color:#27ba9b">热门读物</h1>
+        <h1 style="color:#27ba9b">{{ Ca }}</h1>
       </div>
       <div class="infinite-list-wrapper" style="overflow:auto;text-align: center">
         <ul
@@ -24,17 +16,17 @@
           <li v-for="i in count" class="list-item">
             <el-row>
               <el-col :span="8" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 2 : 0">
-                <a href="/login">
-                <el-card :body-style="{ padding: '20px' }" shadow="hover" class="BookCard">
-                  <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image" alt="">
-                  <div style="padding: 1px;">
-                    <div style="font-size: 15px">《你的名字》</div>
-                    <div style="font-size: 15px">￥20</div>
-                    <div class="bottom clearfix">
-                      <time class="time">{{ currentDate }}</time>
+                <a href="/detail/id=1">
+                  <el-card :body-style="{ padding: '20px' }" shadow="hover" class="BookCard">
+                    <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image" alt="">
+                    <div style="padding: 1px;">
+                      <div style="font-size: 15px">《你的名字》</div>
+                      <div style="font-size: 15px">￥20</div>
+                      <div class="bottom clearfix">
+                        <time class="time">{{ currentDate }}</time>
+                      </div>
                     </div>
-                  </div>
-                </el-card>
+                  </el-card>
                 </a>
               </el-col>
             </el-row>
@@ -45,7 +37,9 @@
       </div>
     </div>
   </div>
+
 </template>
+
 <style scoped lang="scss">
 .BookCard{
   width: 90%;
@@ -91,22 +85,24 @@
 }
 
 
- .el-col-offset-2 {
-   margin-left: 1%;
-   margin-bottom: 1%;
- }
+.el-col-offset-2 {
+  margin-left: 1%;
+  margin-bottom: 1%;
+}
 
- .message{
-   display: block;
-   padding-top: 10px;
-   font-size: 22px;
- }
+.message{
+  display: block;
+  padding-top: 10px;
+  font-size: 22px;
+}
 </style>
+
 <script>
 export default {
   data(){
-    return {
-      card:[{src: new URL("../../../assets/image/card1.jpeg",import.meta.url).href},{src: new URL("../../../assets/image/card2.jpeg",import.meta.url).href},{src: new URL("../../../assets/image/card3.jpeg",import.meta.url).href}],
+    return{
+      Ca:this.$route.params.category,
+      card:[{src: new URL("@/assets/image/card1.jpeg",import.meta.url).href},{src: new URL("@/assets/image/card2.jpeg",import.meta.url).href},{src: new URL("@/assets/image/card3.jpeg",import.meta.url).href}],
       count: 10,
       Data:null,
       loading: false
@@ -124,10 +120,7 @@ export default {
     load () {
       this.loading = true
       setTimeout(() => {
-        // this.axios.get(api).then((response) => {
-        //   this.count=response.data.length
-        //   this.Data=response.data
-        // })
+
         this.count += 2
         this.loading = false
       }, 2000)
