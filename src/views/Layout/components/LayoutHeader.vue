@@ -1,5 +1,6 @@
 <script setup>
 import { useUserStore } from '@/stores/index.js'
+import avatar from '@/assets/image/avatar.jpg'
 import router from '@/router'
 const userStore = useUserStore()
 
@@ -7,8 +8,8 @@ const confirm = () => {
   console.log('用户退出登录')
   // 1 清除用户信息
   userStore.removeToken()
-
   userStore.setUserInfo({})
+
   // 2 返回到登录页
   // router.replace({path: '/login'})
   setTimeout(() => {
@@ -22,9 +23,9 @@ const confirm = () => {
     <div class="container">
       <ul>
         <!-- 多模板渲染 区分登录状态和非登录状态 userStore.userInfo.token-->
-        <template v-if="true">
+        <template v-if="userStore.token">
           <li>
-            <a href=""><i class="iconfont icon-user"></i> Ronan </a>
+            <a href=""><i class="iconfont icon-user"></i> {{ userStore.user.username }} </a>
           </li>
           <li>
             <el-popconfirm @confirm="confirm" title="确认退出吗？" confirm-button-text="确认" cancel-button-text="取消">
@@ -34,7 +35,8 @@ const confirm = () => {
             </el-popconfirm>
           </li>
           <li><a href="javascript:;" @click="router.push('/cartlist')">我的订单</a></li>
-          <li><a href="javascript:;" @click="router.push('/member')">会员中心</a></li>
+          <li><a href="javascript:;" @click="router.push('/')">会员中心</a></li>
+          <li><el-avatar :src="userStore.user.avatar || avatar"></el-avatar></li>
         </template>
         <template v-else>
           <li><a href="javascript:;" @click="$router.push('/login')">请先登录</a></li>

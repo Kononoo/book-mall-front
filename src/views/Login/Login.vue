@@ -57,9 +57,7 @@ const login = async () => {
   console.log('开始登录')
   const res = await userLoginAPI(formModel)
   // 保存用户token和用户信息
-  console.log(res)
   userStore.setToken(res.data.token)
-  console.log(res.data.data)
   userStore.setUserInfo(res.data.data)
   ElMessage.success('登录成功')
   if (res.data.data.role === 1) {
