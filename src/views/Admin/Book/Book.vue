@@ -147,6 +147,7 @@ const tableRowClassName = (rowIndex) => {
       <el-table-column prop="price" label="图书价格" sortable>
         <template #default="scope"> ￥ {{ scope.row.price }}</template>
       </el-table-column>
+      <el-table-column prop="stock" label="图书库存" />
       <el-table-column prop="status" label="售卖状态">
         <template v-slot="{ row }">
           {{ row.status === 1 ? '起售' : '停售' }}

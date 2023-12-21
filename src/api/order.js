@@ -9,7 +9,7 @@ export const orderSubmitAPI = (userId) => {
   })
 }
 
-// 分页获取订单数据, data穿过来的数据 {userId, begin, end}
+// 分页获取订单数据, data需要传过来的数据 {username, begin, end}
 export const orderPageAPI = ({ currentPage, pageSize, data }) => {
   return httpInstance({
     url: '/order/page',
