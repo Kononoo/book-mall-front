@@ -21,7 +21,7 @@ const onUpdateAvatar = async () => {
 
 // 上传图片
 // const uploadUrl = `${import.meta.env.BASE_URL}api1/common/upload`     // import.meta.env.BASE_URL = /
-const uploadUrl = `/api/common/upload`
+const uploadUrl = `/common/upload`
 const userStore = useUserStore()
 userStore.getUserInfo()
 const avatar = ref(userStore.user.avatar)

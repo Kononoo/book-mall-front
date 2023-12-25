@@ -74,7 +74,7 @@ const onSubmit = async () => {
 
 // 上传图片
 // const uploadUrl = `${import.meta.env.BASE_URL}api1/common/upload`     // import.meta.env.BASE_URL = /
-const uploadUrl = `/api/common/upload`
+const uploadUrl = `/common/upload` /*/api/common/upload*/
 const beforeUpload = () => {
   // if(file){
   //   const suffix = file.name.split('.')[1]
