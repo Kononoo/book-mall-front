@@ -1,5 +1,5 @@
 <script setup>
-import { Management, Tickets, Histogram, UserFilled, User, Crop, EditPen, CaretBottom, SwitchButton } from '@element-plus/icons-vue'
+import { Management, Tickets, Histogram, UserFilled, User, Crop, EditPen, CaretBottom, SwitchButton, ChromeFilled } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
@@ -86,6 +86,7 @@ const onCommand = async (command) => {
         <div>
           <strong>{{ $route.meta.title }} </strong>
         </div>
+        <a href="javascript:;" @click="router.push('/home')"> ← 返回前台</a>
         <!-- 用户头像 -->
         <el-dropdown placement="bottom-end" @command="onCommand">
           <span class="el-dropdown__box">
@@ -135,6 +136,16 @@ const onCommand = async (command) => {
     align-items: center;
     justify-content: space-between;
 
+    a {
+      font-weight: bold;
+      color: #666666;
+      position: fixed;
+      right: 6vw;
+    }
+    a:hover {
+      color: #1dc779;
+    }
+
     .el-dropdown__box {
       display: flex;
       align-items: center;
@@ -146,6 +157,7 @@ const onCommand = async (command) => {
 
       &:active,
       &:focus {
+        color: #1dc779;
         outline: none;
       }
     }

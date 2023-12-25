@@ -1,5 +1,6 @@
 <script setup>
 import { useUserStore } from '@/stores/index.js'
+import { ChromeFilled } from '@element-plus/icons-vue'
 import avatar from '@/assets/image/avatar.jpg'
 import router from '@/router'
 const userStore = useUserStore()
@@ -24,6 +25,11 @@ const confirm = () => {
       <ul>
         <!-- 多模板渲染 区分登录状态和非登录状态 userStore.userInfo.token-->
         <template v-if="userStore.token">
+          <li>
+            <a href="javascript:;" @click="router.push('/admin')"
+              ><el-icon><ChromeFilled /></el-icon>进入后台</a
+            >
+          </li>
           <li>
             <a href=""><i class="iconfont icon-user"></i> {{ userStore.user.username }} </a>
           </li>

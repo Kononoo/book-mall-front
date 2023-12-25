@@ -19,8 +19,12 @@ export const userRegisterAPI = ({ username, password }) => {
 }
 
 // 获取用户信息
-export const userGetInfoAPI = () => {
-  return httpInstance.get('/user')
+export const userGetInfoAPI = (userId) => {
+  return httpInstance({
+    url: '/user',
+    method: 'GET',
+    params: { userId }
+  })
 }
 
 // 分页查询用户信息
@@ -41,11 +45,11 @@ export const userUpdateInfoAPI = (data) => {
   })
 }
 
-// 用户修改密码
-export const userUpdatePasswordAPI = (data) => {
+// 用户修改密码 oldPassword  newPassword
+export const userUpdatePasswordAPI = ({ oldPassword, newPassword }) => {
   return httpInstance({
     url: '/user',
     method: 'PATCH',
-    data
+    data: { oldPassword, newPassword }
   })
 }

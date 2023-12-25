@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/stores/index.js'
 
 // createRouter 创建路由实例，===> new VueRouter()
 // 1. history模式: createWebHistory()   http://xxx/user
@@ -80,8 +79,18 @@ const router = createRouter({
           meta: { title: '订单管理' }
         },
         {
-          path: 'user',
-          component: () => import('@/views/Admin/User/UserManage.vue'),
+          path: 'user/profile',
+          component: () => import('@/views/Admin/User/UserProfile.vue'),
+          meta: { title: '用户管理' }
+        },
+        {
+          path: 'user/avatar',
+          component: () => import('@/views/Admin/User/UserAvatar.vue'),
+          meta: { title: '用户管理' }
+        },
+        {
+          path: 'user/password',
+          component: () => import('@/views/Admin/User/UserPassword.vue'),
           meta: { title: '用户管理' }
         }
       ]
