@@ -4,6 +4,7 @@ import PageContainer from '@/components/PageContainer.vue'
 import { userUpdatePasswordAPI } from '@/api/user'
 import { useUserStore } from '@/stores'
 import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
 
 const formRef = ref()
 const formData = ref({
@@ -52,11 +53,14 @@ const router = useRouter()
 const submitForm = async () => {
   await formRef.value.validate()
   await userUpdatePasswordAPI(formData.value)
+  ElMessage.success('修改密码成功')
   // 密码修改成功后，清除信息，重新登录
   userStore.removeToken()
   userStore.setUserInfo({})
   // 跳转到登录页
-  await router.push('/login')
+  setTimeout(() => {
+    router.push('/login')
+  }, 1000)
 }
 const resetForm = () => {
   formRef.value.resetFields()

@@ -4,15 +4,12 @@ import { useUserStore } from '@/stores/index.js'
 import { orderGetListAPI } from '@/api/order.js'
 
 // 获取订单
-const isLoading = ref(false)
 const orderList = ref([])
 const getOrderList = async () => {
-  isLoading.value = true
   const userId = useUserStore().user.id
   const res = await orderGetListAPI(userId)
   console.log(res.data)
   orderList.value = res.data.data
-  isLoading.value = false
 }
 getOrderList()
 
@@ -34,7 +31,7 @@ const payHandler = () => {}
     <el-card class="order-card">
       <div class="cartContainer">
         <div class="content">
-          <el-table :data="orderList" :default-sort="{ prop: 'orderState', order: 'ascending' }" ref="table" v-loading="isLoading" empty-text="啥也没有呢">
+          <el-table :data="orderList" :default-sort="{ prop: 'orderState', order: 'ascending' }" ref="table" empty-text="啥也没有呢">
             <el-table-column prop="id" label="订单号" width="180" sortable />
             <!-- <el-table-column label="图片">-->
             <!--   <template #default="scope">-->

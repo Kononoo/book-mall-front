@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import { userGetInfoAPI, userUpdateInfoAPI } from '@/api/user.js'
+import { userUpdateInfoAPI } from '@/api/user.js'
 import { useUserStore } from '@/stores/index.js'
 
 const {
-  user: { id, username, phone, sex, role }
+  user: { id, username, phone, sex, role, address }
 } = useUserStore()
 
 // 表单数据
@@ -14,6 +14,7 @@ const form = ref({
   id,
   username,
   phone,
+  address,
   sex,
   role
 })
@@ -58,6 +59,9 @@ const submitForm = async () => {
       </el-form-item>
       <el-form-item label="用户电话" prop="phone">
         <el-input size="large" v-model="form.phone" clearable style="width: 500px"></el-input>
+      </el-form-item>
+      <el-form-item label="用户地址" prop="address">
+        <el-input size="large" v-model="form.address" clearable style="width: 500px"></el-input>
       </el-form-item>
       <el-form-item label="性别" prop="sex">
         <el-select v-model="form.sex" placeholder="请选择你的性别">

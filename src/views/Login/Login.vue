@@ -27,16 +27,16 @@ readInfo()
 const rules = {
   username: [
     { required: true, message: '请输入用户名', trigger: 'blur' },
-    { min: 3, max: 10, message: '用户名必须是3-10位的字符', trigger: 'blur' }
+    { min: 2, max: 10, message: '用户名必须是2-10位的字符', trigger: 'blur' }
   ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
-    { pattern: /^\S{3,15}$/, message: '密码必须是3-15位的非空字符', trigger: 'blur' }
+    { pattern: /^\S{2,15}$/, message: '密码必须是3-15位的非空字符', trigger: 'blur' }
     // \S表示非空字符
   ],
   repassword: [
     { required: true, message: '请输入密码', trigger: 'blur' },
-    { pattern: /^\S{3,15}$/, message: '密码必须是3-15位的非空字符', trigger: 'blur' },
+    { pattern: /^\S{2,15}$/, message: '密码必须是3-15位的非空字符', trigger: 'blur' },
     {
       validator: (rules, value, callback) => {
         if (value !== formModel.password) {
