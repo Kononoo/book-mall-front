@@ -46,7 +46,7 @@ const router = createRouter({
           component: () => import('@/views/body/LayoutCart.vue')
         },
         {
-          path: 'category/:category',
+          path: 'category/:id',
           name: 'category',
           component: () => import('@/views/body/LayoutCategory.vue')
         }
@@ -89,22 +89,28 @@ const router = createRouter({
   ]
 })
 
-// 路由守卫，管理页面只能管理员进
+// 跳转路由后返回顶部
 router.beforeEach((to, from, next) => {
-  // 检查是否是访问 /admin 下的页面
-  if (to.path.startsWith('/admin')) {
-    // 检查用户角色是否为管理员
-    const userStore = useUserStore()
-    if (userStore.user && userStore.user.role === 1) {
-      // 用户角色为管理员，放行
-      next()
-    } else {
-      // 用户角色不是管理员，可以根据需求进行跳转或其他处理
-      next('/') // 重定向到首页，你也可以跳转到登录页或其他页面
-    }
-  } else {
-    next()
-  }
+  document.documentElement.scrollTop = 0
+  next()
 })
+
+// 路由守卫，管理页面只能管理员进
+// router.beforeEach((to, from, next) => {
+//   // 检查是否是访问 /admin 下的页面
+//   if (to.path.startsWith('/admin')) {
+//     // 检查用户角色是否为管理员
+//     const userStore = useUserStore()
+//     if (userStore.user && userStore.user.role === 1) {
+//       // 用户角色为管理员，放行
+//       next()
+//     } else {
+//       // 用户角色不是管理员，可以根据需求进行跳转或其他处理
+//       next('/') // 重定向到首页，你也可以跳转到登录页或其他页面
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

@@ -18,11 +18,11 @@ export default defineConfig({
 
     // 设置代理，根据我们项目实际情况配置
     proxy: {
-      '/api1': {
+      '/api': {
         target: 'http://localhost:80',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace('/api1', '')
+        rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
   },

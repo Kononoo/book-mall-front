@@ -4,8 +4,8 @@ import httpInstance from '@/utils/request.js'
 export const orderSubmitAPI = (userId) => {
   return httpInstance({
     url: '/order/submit',
-    method: 'POST',
-    data: userId
+    method: 'GET',
+    params: { userId }
   })
 }
 
@@ -20,7 +20,7 @@ export const orderPageAPI = ({ currentPage, pageSize, data }) => {
 }
 
 // 根据用户Id进行订单查询，返回订单列表数据  userId可传可不传 返回List
-export const orderGetAPI = (userId) => {
+export const orderGetListAPI = (userId) => {
   return httpInstance({
     url: '/order',
     method: 'GET',

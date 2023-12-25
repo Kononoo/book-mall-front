@@ -41,6 +41,7 @@ const onAddCart = async () => {
   data.value.bookId = route.params.id
   await shoppingCartAdd(data.value)
   ElMessage.success('添加成功')
+  book.value.stock = book.value.stock - data.value.bookCount
 }
 
 // watch(() => data.value.bookCount, (value, oldValue) => {

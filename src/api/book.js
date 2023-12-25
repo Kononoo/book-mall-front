@@ -45,3 +45,12 @@ export const bookPageAPI = ({ currentPage, pageSize, keyWord }) => {
     params: { currentPage, pageSize, keyWord }
   })
 }
+
+// 条件种类分页查询
+export const bookPageByCategoryIdAPI = ({ currentPage, pageSize, categoryId }) => {
+  return httpInstance({
+    url: '/book/categoryId',
+    method: 'GET',
+    params: { currentPage, pageSize, categoryId }
+  })
+}

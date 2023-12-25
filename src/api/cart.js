@@ -13,7 +13,7 @@ export const shoppingCartAdd = (data) => {
 export const shoppingCartDel = (data) => {
   return httpInstance({
     url: '/cart',
-    methods: 'PUT',
+    method: 'PUT',
     data
   })
 }

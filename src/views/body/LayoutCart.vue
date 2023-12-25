@@ -3,9 +3,8 @@ import { ref } from 'vue'
 import { orderSubmitAPI } from '@/api/order.js'
 import { useUserStore } from '@/stores/index.js'
 import { shoppingCartDel, shoppingCartList } from '@/api/cart.js'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 
-const totalPrice = ref()
 // 点击减一按钮
 const decrementQuantity = (row) => {
   if (row.bookCount > 1) {
@@ -37,40 +36,66 @@ const params = ref({
   bookId: '',
   bookCount: ''
 })
-
+// 总价格处理
+const totalPrice = ref(cartList.value.reduce((pre, next) => pre + next.bookCount * next.bookPrice, 0))
 const handleQuantityChange = async (row) => {
   console.log(row)
   if (parseInt(row.bookCount) <= 0 || row.bookCount === '') {
     row.bookCount = 1
   }
+  // 计算总价
   let price = 0
-  this.cartList.forEach((item) => {
-    if (item.checked) {
-      price += item.bookPrice * item.bookCount
-    }
+  cartList.value.forEach((item) => {
+    console.log(item)
+    price += item.bookPrice * item.bookCount
   })
-  totalPrice.value = price.toFixed(2).toString()
+  totalPrice.value = price
 
   // 调用后端同步数据
   params.value.userId = useUserStore().user.id
-  params.value.bookId = row.id
+  params.value.bookId = row.bookId
   params.value.bookCount = row.bookCount
+  console.log(params.value)
   await shoppingCartDel(params.value)
+  // 刷新数据
+  // await getCartList()
 }
 
 // 改变订单
 const removeItem = async (row) => {
   // 调用后端同步数据
   params.value.userId = useUserStore().user.id
-  params.value.bookId = row.id
+  params.value.bookId = row.bookId
   params.value.bookCount = 0
+  console.log(params.value)
   await shoppingCartDel(params.value)
+  // 刷新数据
+  await getCartList()
 }
 // 提交订单
 const submitOrder = async () => {
-  const res = await orderSubmitAPI()
-  console.log(res)
-  ElMessage.success('下单成功')
+  ElMessageBox.confirm('你确定要下单支付?', '下单', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'success'
+  })
+    .then(async () => {
+      const res = await orderSubmitAPI(useUserStore().user.id)
+      console.log(res)
+      ElMessage.success('下单成功')
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '取消下单'
+      })
+    })
+  // const res = await orderSubmitAPI(useUserStore().user.id)
+  // console.log(res)
+  // ElMessage.success('下单成功')
+
+  // 刷新数据
+  await getCartList()
 }
 </script>
 

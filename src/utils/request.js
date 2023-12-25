@@ -2,7 +2,8 @@ import axios from 'axios'
 import { useUserStore } from '@/stores'
 import { ElMessage } from 'element-plus'
 
-const baseURL = 'http://localhost'
+// const baseURL = 'http://localhost'
+const baseURL = '/api'
 const httpInstance = axios.create({
   baseURL: baseURL,
   timeout: 10000 // 超时时间10s

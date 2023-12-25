@@ -16,12 +16,12 @@ const total = ref(0)
 const params = ref({
   currentPage: 1,
   pageSize: 5,
-  keyWord: ''
+  keyWord: null
 })
 
 // 是否继续加载
 const noMore = computed(() => {
-  return count.value >= 100
+  return count.value >= total.value
 })
 const disabled = computed(() => {
   return loading.value || noMore.value
@@ -42,36 +42,6 @@ const bookList = ref([
     updateTime: '2023-12-21 04:52:04',
     isDeleted: 0,
     categoryName: '童话'
-  },
-  {
-    id: '1737577604876025812',
-    name: '你的孩子',
-    categoryId: 1,
-    author: '新海诚',
-    price: 89.0,
-    stock: 88,
-    image: 'https://haruna.oss-cn-wuhan-lr.aliyuncs.com/book/107124790_p0.png',
-    status: 1,
-    description: '好看就对了',
-    createTime: '2023-12-17 23:26:05',
-    updateTime: '2023-12-21 14:55:49',
-    isDeleted: 0,
-    categoryName: '漫画'
-  },
-  {
-    id: '1737577604876025851',
-    name: '你的名字',
-    categoryId: 1,
-    author: '新海诚',
-    price: 89.0,
-    stock: 82,
-    image: 'https://haruna.oss-cn-wuhan-lr.aliyuncs.com/book/5e9843dd-912b-4232-aec0-ece98b3dd89d.jpg',
-    status: 1,
-    description: '好看就对了',
-    createTime: '2023-12-17 23:26:05',
-    updateTime: '2023-12-21 14:58:38',
-    isDeleted: 0,
-    categoryName: '漫画'
   }
 ])
 
@@ -107,7 +77,8 @@ const load = () => {
       <div class="book-list">
         <el-row :gutter="20">
           <el-col :span="6" v-for="book in bookList" :key="book.id">
-            <a :href="`/detail/${book.id}`">
+            <!-- <a :href="`/detail/${book.id}`"> </a>-->
+            <RouterLink :to="`/detail/${book.id}`">
               <el-card shadow="hover" class="book-card">
                 <img :src="book.image" class="book-image" alt="" />
                 <div class="book-info">
@@ -119,7 +90,7 @@ const load = () => {
                   <div class="time">{{ formatTime(book.currentTime) }}</div>
                 </div>
               </el-card>
-            </a>
+            </RouterLink>
           </el-col>
         </el-row>
         <p v-if="loading" class="loading-message">加载中...</p>

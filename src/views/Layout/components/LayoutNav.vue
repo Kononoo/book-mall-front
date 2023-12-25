@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { Search } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
 import { categoryListAPI } from '@/api/category.js'
 
 const categoryList = ref([])
@@ -12,8 +13,11 @@ const getCategoryList = async () => {
 getCategoryList()
 
 const jumpTo = (path) => {
-  this.$router.push({ path: path })
+  const router = useRouter()
   console.log(path)
+  router.push(path)
+  // router.push({ path: path })
+  // this.$router.push({ path: path })
 }
 </script>
 
@@ -28,7 +32,7 @@ const jumpTo = (path) => {
         <el-menu-item index="/home" @click="$router.push('/home')">首页</el-menu-item>
         <el-sub-menu index="/category">
           <template #title>图书类别</template>
-          <el-menu-item v-for="item in categoryList" :key="item.id" @click="jumpTo('/category/' + item.id)">
+          <el-menu-item v-for="item in categoryList" :key="item.id" :index="`/category/${item.id}`">
             {{ item.name }}
           </el-menu-item>
         </el-sub-menu>

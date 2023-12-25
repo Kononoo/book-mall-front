@@ -73,8 +73,8 @@ const onSubmit = async () => {
 }
 
 // 上传图片
-// const uploadUrl = `${import.meta.env.BASE_URL}api1/common/upload`
-const uploadUrl = `/api1/common/upload`
+// const uploadUrl = `${import.meta.env.BASE_URL}api1/common/upload`     // import.meta.env.BASE_URL = /
+const uploadUrl = `/api/common/upload`
 const beforeUpload = () => {
   // if(file){
   //   const suffix = file.name.split('.')[1]
