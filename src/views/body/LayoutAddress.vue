@@ -1,3 +1,104 @@
+<script>
+import service from '@/utils/request.js'
+import { ElMessage } from 'element-plus'
+import pca from '@/assets/adress/pca-code.json'
+export default {
+  data() {
+    return {
+      addressData: [], //table绑定表格数据
+      addressEdit: [], //用于动态修改行内数据
+      addressInput: {
+        adname: '',
+        adphone: '',
+        adpca: '',
+        addetail: '',
+        adisdefault: 0
+      },
+      pcaOptions: pca,
+      addressProps: {
+        label: 'name',
+        children: 'children',
+        value: 'code'
+      }
+    }
+  },
+  // created() {
+  //   this.loadAddressData()
+  },
+  //  methods: {
+  //     // 以下为 loadAddressData 方法的完善
+  //     loadAddressData() {
+  //     // 发送请求获取数据
+  //     service({
+  //       method: 'get',
+  //       url: '/address/get'
+  //     })
+  //       .then((response) => {
+  //         // 处理成功响应
+  //         this.addressData = response.data
+  //         this.addressEdit = new Array(this.addressData.length).fill(false)
+  //       })
+  //       .catch((error) => {
+  //         // 处理错误响应
+  //         console.error('Failed to fetch address data:', error)
+  //         // 可以添加一些提示用户的逻辑，比如 ElMessage 提示
+  //         ElMessage.error('获取地址数据失败，请重试')
+  //       })
+  //   },
+  //   addAddress() {
+  //     // 创建一个新的地址对象，可以根据你的数据结构进行修改
+  //     const newAddress = {
+  //       adname: this.addressInput.adname,
+  //       adphone: this.addressInput.adphone,
+  //       adpca: this.addressInput.adpca,
+  //       addetail: this.addressInput.addetail,
+  //       adisdefault: this.addressInput.adisdefault
+  //     }
+  //
+  //     // 发起后端请求，将新地址保存到数据库
+  //     service({
+  //       method: 'post', // 根据实际情况使用 post 或其他 HTTP 方法
+  //       url: '/api/address', // 修改为你的后端地址
+  //       data: newAddress
+  //     })
+  //       .then((response) => {
+  //         // 请求成功处理
+  //         console.log('Address added successfully:', response.data)
+  //
+  //         // 刷新地址数据，如果需要
+  //         this.loadAddressData()
+  //       })
+  //       .catch((error) => {
+  //         // 请求失败处理
+  //         console.error('Error adding address:', error)
+  //       })
+  //
+  //     // 添加新地址到前端数据
+  //     this.addressData.push(newAddress)
+  //     this.addressEdit[this.addressData.length - 1] = true
+  //   },
+  //   editAddress(index) {
+  //     this.addressEdit[index] = !this.addressEdit[index]
+  //   },
+  //   saveAddress(index,value) {
+  //     this.addressEdit[index] = !this.addressEdit[index]
+  //   },
+  //   deleteAddress(index, value) {
+  //     this.addressData.splice(index, 1)
+  //   },
+  //   handleAddressNode(value) {
+  //     //value为数组
+  //     this.addressData.adpca = value[2] //三级级联地址，只需要把第三级存入数据库即可
+  //   },
+  //   changetest(val) {
+  //     console.log(typeof val)
+  //     console.log(val)
+  //   }
+  // }
+}
+</script>
+
+
 <template>
   <div class="container">
     <div style="padding: 30px">
@@ -69,107 +170,6 @@
   </div>
 </template>
 
-<script>
-import service from '@/utils/request.js'
-import { ElMessage } from 'element-plus'
-import pca from '@/assets/adress/pca-code.json'
-
-export default {
-  name: 'Address',
-  data() {
-    return {
-      addressData: [], //table绑定表格数据
-      addressEdit: [], //用于动态修改行内数据
-      addressInput: {
-        adname: '',
-        adphone: '',
-        adpca: '',
-        addetail: '',
-        adisdefault: 0
-      },
-      pcaOptions: pca,
-      addressProps: {
-        label: 'name',
-        children: 'children',
-        value: 'code'
-      }
-    }
-  },
-  created() {
-    this.loadAddressData()
-  },
-  methods: {
-    // 以下为 loadAddressData 方法的完善
-    loadAddressData() {
-      // 发送请求获取数据
-      service({
-        method: 'get',
-        url: '/address/get'
-      })
-        .then((response) => {
-          // 处理成功响应
-          this.addressData = response.data
-          this.addressEdit = new Array(this.addressData.length).fill(false)
-        })
-        .catch((error) => {
-          // 处理错误响应
-          console.error('Failed to fetch address data:', error)
-          // 可以添加一些提示用户的逻辑，比如 ElMessage 提示
-          ElMessage.error('获取地址数据失败，请重试')
-        })
-    },
-    addAddress() {
-      // 创建一个新的地址对象，可以根据你的数据结构进行修改
-      const newAddress = {
-        adname: this.addressInput.adname,
-        adphone: this.addressInput.adphone,
-        adpca: this.addressInput.adpca,
-        addetail: this.addressInput.addetail,
-        adisdefault: this.addressInput.adisdefault
-      }
-
-      // 发起后端请求，将新地址保存到数据库
-      service({
-        method: 'post', // 根据实际情况使用 post 或其他 HTTP 方法
-        url: '/api/address', // 修改为你的后端地址
-        data: newAddress
-      })
-        .then((response) => {
-          // 请求成功处理
-          console.log('Address added successfully:', response.data)
-
-          // 刷新地址数据，如果需要
-          this.loadAddressData()
-        })
-        .catch((error) => {
-          // 请求失败处理
-          console.error('Error adding address:', error)
-        })
-
-      // 添加新地址到前端数据
-      this.addressData.push(newAddress)
-      this.addressEdit[this.addressData.length - 1] = true
-    },
-    editAddress(index) {
-      this.addressEdit[index] = !this.addressEdit[index]
-    },
-    saveAddress(index, value) {
-      this.addressEdit[index] = !this.addressEdit[index]
-    },
-    deleteAddress(index, value) {
-      this.addressData.splice(index, 1)
-    },
-    handleAddressNode(value) {
-      //value为数组
-      this.addressData.adpca = value[2] //三级级联地址，只需要把第三级存入数据库即可
-    },
-    changetest(val) {
-      console.log(typeof val)
-      console.log(val)
-    }
-  }
-}
-</script>
 <style scoped>
 .card-header {
   display: flex;
